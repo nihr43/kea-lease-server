@@ -12,7 +12,17 @@ def csv_to_json(file_path):
         reader = csv.DictReader(csv_file)
         for row in reader:
             data.append(row)
-    return json.dumps(data, indent=2)
+
+    filtered_data = {}
+    for entry in data:
+        address = entry["address"]
+        expire = int(entry["expire"])
+        if address not in filtered_data or expire > int(
+            filtered_data[address]["expire"]
+        ):
+            filtered_data[address] = entry
+
+    return json.dumps(filtered_data, indent=2)
 
 
 @app.route("/leases", methods=["GET"])
