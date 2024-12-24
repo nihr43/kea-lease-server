@@ -36,7 +36,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--host", type=str, default="0.0.0.0")
     args = parser.parse_args()
-    app.run(debug=True, host=args.host)
+    app.run(host=args.host)
 
 
 if __name__ == "__main__":
